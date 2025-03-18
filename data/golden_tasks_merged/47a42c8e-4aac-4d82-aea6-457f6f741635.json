@@ -1,0 +1,50 @@
+{
+  "task_id": "47a42c8e-4aac-4d82-aea6-457f6f741635",
+  "source": "excel",
+  "require_login": false,
+  "user_messages": [
+    "Freeze panes above row 2 so the first row remains visible while scrolling."
+  ],
+  "initialization": [
+    {
+      "type": "download",
+      "parameters": {
+        "files": [
+          {
+            "url": "https://docs.google.com/spreadsheets/d/1UGpYtuHjRqsLY9G3fyrpWWfTMnB5ohAe/export?format=xlsx",
+            "path": "Baseball_init_good.xlsx"
+          }
+        ]
+      }
+    },
+    {
+      "type": "open",
+      "parameters": {
+        "path": "Baseball_init_good.xlsx"
+      }
+    }
+  ],
+  "evaluation": {
+    "golden_files": [
+      {
+        "url": "https://drive.google.com/uc?id=1hXFEyG3-9VMyVt1zvwRqd4-RWEay8XXp&export=download&export=download",
+        "path": "Baseball_init_good_golden.xlsx"
+      }
+    ],
+    "evaluator_modes": [
+      "check_frozen_panes"
+    ]
+  },
+  "date_generated": "01-21-2025",
+  "related_skills": [
+    {
+      "name": "freeze_panes",
+      "parameters": {
+        "freeze_cell": "A2"
+      }
+    }
+  ],
+  "related_apps": [
+    "Microsoft Excel"
+  ]
+}

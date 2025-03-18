@@ -1,0 +1,60 @@
+{
+  "task_id": "8a0768ce-ae61-454d-8907-874056cfb2f4",
+  "source": "documentation",
+  "require_login": false,
+  "user_messages": [
+    "Calculate the percentage decrease in Fixed Assets from 2014 (C2) to 2019 (C7) and paste it in cell C8."
+  ],
+  "initialization": [
+    {
+      "type": "download",
+      "parameters": {
+        "files": [
+          {
+            "url": "https://drive.google.com/uc?id=135XDfozh5XmO9juDVf_o1mtDEfeQV8wO&export=download",
+            "path": "SmallBalanceSheet.xlsx"
+          }
+        ]
+      }
+    },
+    {
+      "type": "open",
+      "parameters": {
+        "path": "SmallBalanceSheet.xlsx"
+      }
+    }
+  ],
+  "evaluation": {
+    "golden_files": [
+      {
+        "url": "https://drive.google.com/uc?id=10PqutQzzBxTK4l9YTBJCoQteYQh4offc&export=download&export=download",
+        "path": "SmallBalanceSheet_golden.xlsx"
+      }
+    ],
+    "evaluator_modes": [
+      "check_sheet_names",
+      "check_content",
+      "check_row_properties",
+      "check_column_properties",
+      "check_comments",
+      "check_formulas",
+      "check_formatting",
+      "check_merged_cells"
+    ]
+  },
+  "related_skills": [
+    {
+      "name": "apply_formula_to_cell_range",
+      "parameters": {
+        "start_cell": "C8",
+        "end_cell": "C8",
+        "formula": "=((C2-C7)/C7)*100"
+      }
+    }
+  ],
+  "date_generated": "01-22-2025",
+  "related_apps": [
+    "Microsoft Excel"
+  ],
+  "specificity": "medium"
+}

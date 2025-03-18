@@ -1,0 +1,50 @@
+{
+  "task_id": "c7b4024a-4fe6-4a6f-b91f-3b5f4dc54ff2",
+  "source": "excel",
+  "require_login": false,
+  "user_messages": [
+    "Show row and column headings"
+  ],
+  "initialization": [
+    {
+      "type": "download",
+      "parameters": {
+        "files": [
+          {
+            "url": "https://docs.google.com/spreadsheets/d/15EF_7Gb66TMQWWIesx2MVMmHMt737Quv/export?format=xlsx",
+            "path": "Baseball_init_good.xlsx"
+          }
+        ]
+      }
+    },
+    {
+      "type": "open",
+      "parameters": {
+        "path": "Baseball_init_good.xlsx"
+      }
+    }
+  ],
+  "evaluation": {
+    "golden_files": [
+      {
+        "url": "https://drive.google.com/uc?id=148Wf0rOqw9ZNww41AMea764H-l88KpNk&export=download&export=download",
+        "path": "Baseball_init_good_golden.xlsx"
+      }
+    ],
+    "evaluator_modes": [
+      "check_sheet_views"
+    ]
+  },
+  "date_generated": "01-21-2025",
+  "related_skills": [
+    {
+      "name": "toggle_headings",
+      "parameters": {
+        "turn_on": true
+      }
+    }
+  ],
+  "related_apps": [
+    "Microsoft Excel"
+  ]
+}

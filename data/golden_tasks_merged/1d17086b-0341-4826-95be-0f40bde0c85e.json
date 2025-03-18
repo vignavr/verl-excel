@@ -1,0 +1,62 @@
+{
+  "task_id": "1d17086b-0341-4826-95be-0f40bde0c85e",
+  "source": "documentation",
+  "require_login": false,
+  "user_messages": [
+    "Sort ONLY the Owner's Equity column from highest ($282,688 in 2019, cell H7) to lowest ($172,474 in 2014, cell H2)"
+  ],
+  "initialization": [
+    {
+      "type": "download",
+      "parameters": {
+        "files": [
+          {
+            "url": "https://drive.google.com/uc?id=135XDfozh5XmO9juDVf_o1mtDEfeQV8wO&export=download",
+            "path": "SmallBalanceSheet.xlsx"
+          }
+        ]
+      }
+    },
+    {
+      "type": "open",
+      "parameters": {
+        "path": "SmallBalanceSheet.xlsx"
+      }
+    }
+  ],
+  "related_skills": [
+    {
+      "name": "sort_range",
+      "parameters": {
+        "start_cell": "H2",
+        "end_cell": "H7",
+        "sort_column_alphabet": "H",
+        "sort_order": "descending",
+        "sort_column_name": "Owner's Equity"
+      }
+    }
+  ],
+  "evaluation": {
+    "golden_files": [
+      {
+        "url": "https://docs.google.com/spreadsheets/d/1dya0Ia0fRbKwJXcjed4IrPcCrmHruSv4/export?format=xlsx",
+        "path": "SmallBalanceSheet_golden.xlsx"
+      }
+    ],
+    "evaluator_modes": [
+      "check_sheet_names",
+      "check_content",
+      "check_row_properties",
+      "check_column_properties",
+      "check_comments",
+      "check_formulas",
+      "check_formatting",
+      "check_merged_cells"
+    ]
+  },
+  "date_generated": "01-22-2025",
+  "related_apps": [
+    "Microsoft Excel"
+  ],
+  "specificity": "medium"
+}

@@ -1,0 +1,60 @@
+{
+  "task_id": "34ba5efd-4b18-4cdd-9fa4-a6553dc998f6",
+  "source": "documentation",
+  "require_login": false,
+  "user_messages": [
+    "Calculate the sum of Other Assets for years 2014-2016 (column D, rows 2-4) and paste it in cell D8."
+  ],
+  "initialization": [
+    {
+      "type": "download",
+      "parameters": {
+        "files": [
+          {
+            "url": "https://drive.google.com/uc?id=135XDfozh5XmO9juDVf_o1mtDEfeQV8wO&export=download",
+            "path": "SmallBalanceSheet.xlsx"
+          }
+        ]
+      }
+    },
+    {
+      "type": "open",
+      "parameters": {
+        "path": "SmallBalanceSheet.xlsx"
+      }
+    }
+  ],
+  "evaluation": {
+    "golden_files": [
+      {
+        "url": "https://drive.google.com/uc?id=1ciSUKdhlHKgVMSpD5ggqB7vb9tcSufCh&export=download&export=download",
+        "path": "SmallBalanceSheet_golden.xlsx"
+      }
+    ],
+    "evaluator_modes": [
+      "check_sheet_names",
+      "check_content",
+      "check_row_properties",
+      "check_column_properties",
+      "check_comments",
+      "check_formulas",
+      "check_formatting",
+      "check_merged_cells"
+    ]
+  },
+  "related_skills": [
+    {
+      "name": "apply_formula_to_cell_range",
+      "parameters": {
+        "start_cell": "D8",
+        "end_cell": "D8",
+        "formula": "=SUM(D2:D4)"
+      }
+    }
+  ],
+  "date_generated": "01-22-2025",
+  "related_apps": [
+    "Microsoft Excel"
+  ],
+  "specificity": "medium"
+}

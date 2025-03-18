@@ -1,0 +1,57 @@
+{
+  "task_id": "e5315302-8fdb-4ce0-9580-41b01852d718",
+  "source": "excel",
+  "require_login": false,
+  "user_messages": [
+    "Insert a new column before column E."
+  ],
+  "initialization": [
+    {
+      "type": "download",
+      "parameters": {
+        "files": [
+          {
+            "url": "https://docs.google.com/spreadsheets/d/1UGpYtuHjRqsLY9G3fyrpWWfTMnB5ohAe/export?format=xlsx",
+            "path": "Baseball_init_good.xlsx"
+          }
+        ]
+      }
+    },
+    {
+      "type": "open",
+      "parameters": {
+        "path": "Baseball_init_good.xlsx"
+      }
+    }
+  ],
+  "evaluation": {
+    "golden_files": [
+      {
+        "url": "https://drive.google.com/uc?id=10mHKql9qBa8EOPjG6uXQE3VXO7vbYXwS&export=download&export=download",
+        "path": "Baseball_init_good_golden.xlsx"
+      }
+    ],
+    "evaluator_modes": [
+      "check_sheet_names",
+      "check_content",
+      "check_row_properties",
+      "check_column_properties",
+      "check_comments",
+      "check_formulas",
+      "check_formatting",
+      "check_merged_cells"
+    ]
+  },
+  "date_generated": "01-21-2025",
+  "related_skills": [
+    {
+      "name": "insert_column",
+      "parameters": {
+        "column_name": "E"
+      }
+    }
+  ],
+  "related_apps": [
+    "Microsoft Excel"
+  ]
+}

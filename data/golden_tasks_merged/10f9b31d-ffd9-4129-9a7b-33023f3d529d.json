@@ -1,0 +1,59 @@
+{
+  "task_id": "10f9b31d-ffd9-4129-9a7b-33023f3d529d",
+  "source": "excel",
+  "require_login": false,
+  "user_messages": [
+    "Enable text wrapping for cells C5."
+  ],
+  "initialization": [
+    {
+      "type": "download",
+      "parameters": {
+        "files": [
+          {
+            "url": "https://docs.google.com/spreadsheets/d/1UGpYtuHjRqsLY9G3fyrpWWfTMnB5ohAe/export?format=xlsx",
+            "path": "Baseball_init_good.xlsx"
+          }
+        ]
+      }
+    },
+    {
+      "type": "open",
+      "parameters": {
+        "path": "Baseball_init_good.xlsx"
+      }
+    }
+  ],
+  "evaluation": {
+    "golden_files": [
+      {
+        "url": "https://drive.google.com/uc?id=1AcAbSNg9XMoCevXu4gXWmsRJYjNktuqF&export=download&export=download",
+        "path": "Baseball_init_good_golden.xlsx"
+      }
+    ],
+    "evaluator_modes": [
+      "check_sheet_names",
+      "check_content",
+      "check_row_properties",
+      "check_column_properties",
+      "check_comments",
+      "check_formulas",
+      "check_formatting",
+      "check_merged_cells"
+    ]
+  },
+  "date_generated": "01-21-2025",
+  "related_skills": [
+    {
+      "name": "toggle_text_wrap",
+      "parameters": {
+        "start_cell": "C5",
+        "end_cell": "C5",
+        "wrap": true
+      }
+    }
+  ],
+  "related_apps": [
+    "Microsoft Excel"
+  ]
+}

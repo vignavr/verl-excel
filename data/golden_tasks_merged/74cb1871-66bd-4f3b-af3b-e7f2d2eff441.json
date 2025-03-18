@@ -1,0 +1,60 @@
+{
+  "task_id": "74cb1871-66bd-4f3b-af3b-e7f2d2eff441",
+  "source": "excel",
+  "require_login": false,
+  "user_messages": [
+    "Set the values in cells C1:C5 to 'Hello, World, Yes, No, Maybe' separated by commas."
+  ],
+  "initialization": [
+    {
+      "type": "download",
+      "parameters": {
+        "files": [
+          {
+            "url": "https://docs.google.com/spreadsheets/d/1UGpYtuHjRqsLY9G3fyrpWWfTMnB5ohAe/export?format=xlsx",
+            "path": "Baseball_init_good.xlsx"
+          }
+        ]
+      }
+    },
+    {
+      "type": "open",
+      "parameters": {
+        "path": "Baseball_init_good.xlsx"
+      }
+    }
+  ],
+  "evaluation": {
+    "golden_files": [
+      {
+        "url": "https://drive.google.com/uc?id=1PbDJLxZKlxlVxKwbh7jbtmIUeLnrdDyb&export=download&export=download",
+        "path": "Baseball_init_good_golden.xlsx"
+      }
+    ],
+    "evaluator_modes": [
+      "check_sheet_names",
+      "check_content",
+      "check_row_properties",
+      "check_column_properties",
+      "check_comments",
+      "check_formulas",
+      "check_formatting",
+      "check_merged_cells"
+    ]
+  },
+  "date_generated": "01-21-2025",
+  "related_skills": [
+    {
+      "name": "write_values_to_range",
+      "parameters": {
+        "start_cell": "C1",
+        "end_cell": "C5",
+        "value": "Hello,World,Yes,No,Maybe",
+        "delimiter": ","
+      }
+    }
+  ],
+  "related_apps": [
+    "Microsoft Excel"
+  ]
+}

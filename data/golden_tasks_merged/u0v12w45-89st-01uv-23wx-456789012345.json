@@ -1,0 +1,50 @@
+{
+  "task_id": "u0v12w45-89st-01uv-23wx-456789012345",
+  "source": "excel",
+  "require_login": false,
+  "user_messages": [
+    "Switch to Page Break Preview mode."
+  ],
+  "initialization": [
+    {
+      "type": "download",
+      "parameters": {
+        "files": [
+          {
+            "url": "https://docs.google.com/spreadsheets/d/1UGpYtuHjRqsLY9G3fyrpWWfTMnB5ohAe/export?format=xlsx",
+            "path": "Baseball_init_good.xlsx"
+          }
+        ]
+      }
+    },
+    {
+      "type": "open",
+      "parameters": {
+        "path": "Baseball_init_good.xlsx"
+      }
+    }
+  ],
+  "evaluation": {
+    "golden_files": [
+      {
+        "url": "https://drive.google.com/uc?id=1cdrFtMng7wtcv9jEoyvLGKxfyNV02JPp&export=download&export=download",
+        "path": "Baseball_init_good_golden.xlsx"
+      }
+    ],
+    "evaluator_modes": [
+      "check_sheet_views"
+    ]
+  },
+  "date_generated": "01-21-2025",
+  "related_skills": [
+    {
+      "name": "toggle_page_break_preview",
+      "parameters": {
+        "enable": true
+      }
+    }
+  ],
+  "related_apps": [
+    "Microsoft Excel"
+  ]
+}

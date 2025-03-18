@@ -1,0 +1,58 @@
+{
+  "task_id": "16c68453-55db-42be-bf2d-27553dd944c5",
+  "source": "documentation",
+  "require_login": false,
+  "user_messages": [
+    "Create a new column between columns B and C"
+  ],
+  "initialization": [
+    {
+      "type": "download",
+      "parameters": {
+        "files": [
+          {
+            "url": "https://drive.google.com/uc?id=135XDfozh5XmO9juDVf_o1mtDEfeQV8wO&export=download",
+            "path": "SmallBalanceSheet.xlsx"
+          }
+        ]
+      }
+    },
+    {
+      "type": "open",
+      "parameters": {
+        "path": "SmallBalanceSheet.xlsx"
+      }
+    }
+  ],
+  "evaluation": {
+    "golden_files": [
+      {
+        "url": "https://drive.google.com/uc?id=1doriplk1KXb-nXUHfH472vIr4JX4YvxF&export=download&export=download",
+        "path": "SmallBalanceSheet_golden.xlsx"
+      }
+    ],
+    "evaluator_modes": [
+      "check_sheet_names",
+      "check_content",
+      "check_row_properties",
+      "check_column_properties",
+      "check_comments",
+      "check_formulas",
+      "check_formatting",
+      "check_merged_cells"
+    ]
+  },
+  "related_skills": [
+    {
+      "name": "insert_column",
+      "parameters": {
+        "column_name": "C"
+      }
+    }
+  ],
+  "date_generated": "01-22-2025",
+  "related_apps": [
+    "Microsoft Excel"
+  ],
+  "specificity": "medium"
+}

@@ -1,0 +1,60 @@
+{
+  "task_id": "s8t90u23-67qr-89st-01uv-234567890123",
+  "source": "excel",
+  "require_login": false,
+  "user_messages": [
+    "Insert a hyperlink to http://www.example.com in cell A1, text displayed should be 'Click here' and screen tip should be empty"
+  ],
+  "initialization": [
+    {
+      "type": "download",
+      "parameters": {
+        "files": [
+          {
+            "url": "https://docs.google.com/spreadsheets/d/1UGpYtuHjRqsLY9G3fyrpWWfTMnB5ohAe/export?format=xlsx",
+            "path": "Baseball_init_good.xlsx"
+          }
+        ]
+      }
+    },
+    {
+      "type": "open",
+      "parameters": {
+        "path": "Baseball_init_good.xlsx"
+      }
+    }
+  ],
+  "evaluation": {
+    "golden_files": [
+      {
+        "url": "https://drive.google.com/uc?id=1DYqRBvHsJAhhKfFko1Nrr2xwjVI8xsLr&export=download&export=download",
+        "path": "Baseball_init_good_golden.xlsx"
+      }
+    ],
+    "evaluator_modes": [
+      "check_sheet_names",
+      "check_content",
+      "check_row_properties",
+      "check_column_properties",
+      "check_comments",
+      "check_formulas",
+      "check_formatting",
+      "check_merged_cells"
+    ]
+  },
+  "date_generated": "01-21-2025",
+  "related_skills": [
+    {
+      "name": "insert_hyperlink",
+      "parameters": {
+        "cell": "A1",
+        "url": "http://www.example.com",
+        "display_text": "Click here",
+        "screen_tip": ""
+      }
+    }
+  ],
+  "related_apps": [
+    "Microsoft Excel"
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "task_id": "a03df05f-e9df-4902-8d54-c23b841444fe",
+  "source": "documentation",
+  "require_login": false,
+  "user_messages": [
+    "Insert a column after Assets (column E)"
+  ],
+  "initialization": [
+    {
+      "type": "download",
+      "parameters": {
+        "files": [
+          {
+            "url": "https://drive.google.com/uc?id=135XDfozh5XmO9juDVf_o1mtDEfeQV8wO&export=download",
+            "path": "SmallBalanceSheet.xlsx"
+          }
+        ]
+      }
+    },
+    {
+      "type": "open",
+      "parameters": {
+        "path": "SmallBalanceSheet.xlsx"
+      }
+    }
+  ],
+  "evaluation": {
+    "golden_files": [
+      {
+        "url": "https://drive.google.com/uc?id=1E16oARTIIo2zNgtvvR3fGAD5-xyn9fEt&export=download&export=download",
+        "path": "SmallBalanceSheet_golden.xlsx"
+      }
+    ],
+    "evaluator_modes": [
+      "check_sheet_names",
+      "check_content",
+      "check_row_properties",
+      "check_column_properties",
+      "check_comments",
+      "check_formulas",
+      "check_formatting",
+      "check_merged_cells"
+    ]
+  },
+  "related_skills": [
+    {
+      "name": "insert_column",
+      "parameters": {
+        "column_name": "F"
+      }
+    }
+  ],
+  "date_generated": "01-22-2025",
+  "related_apps": [
+    "Microsoft Excel"
+  ],
+  "specificity": "medium"
+}

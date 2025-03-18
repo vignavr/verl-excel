@@ -1,0 +1,61 @@
+{
+  "task_id": "aa62dccb-1a94-4d29-9d90-67c0c71f58c6",
+  "source": "excel",
+  "require_login": false,
+  "user_messages": [
+    "Sort range A1:X30 by Column H (\"History\") in ascending order."
+  ],
+  "initialization": [
+    {
+      "type": "download",
+      "parameters": {
+        "files": [
+          {
+            "url": "https://docs.google.com/spreadsheets/d/1UGpYtuHjRqsLY9G3fyrpWWfTMnB5ohAe/export?format=xlsx",
+            "path": "Baseball_init_good.xlsx"
+          }
+        ]
+      }
+    },
+    {
+      "type": "open",
+      "parameters": {
+        "path": "Baseball_init_good.xlsx"
+      }
+    }
+  ],
+  "evaluation": {
+    "golden_files": [
+      {
+        "url": "https://drive.google.com/uc?id=19hTK3vuGU9KTqbmMpm7tf-pRs2EcmONA&export=download&export=download",
+        "path": "Baseball_init_good_golden.xlsx"
+      }
+    ],
+    "evaluator_modes": [
+      "check_sheet_names",
+      "check_content",
+      "check_row_properties",
+      "check_column_properties",
+      "check_comments",
+      "check_formulas",
+      "check_formatting",
+      "check_merged_cells"
+    ]
+  },
+  "date_generated": "01-21-2025",
+  "related_skills": [
+    {
+      "name": "sort_range",
+      "parameters": {
+        "start_cell": "A1",
+        "end_cell": "X30",
+        "sort_column_alphabet": "H",
+        "sort_order": "ascending",
+        "sort_column_name": "History"
+      }
+    }
+  ],
+  "related_apps": [
+    "Microsoft Excel"
+  ]
+}

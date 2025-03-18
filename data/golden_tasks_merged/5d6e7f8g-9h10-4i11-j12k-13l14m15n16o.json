@@ -1,0 +1,59 @@
+{
+  "task_id": "5d6e7f8g-9h10-4i11-j12k-13l14m15n16o",
+  "source": "excel",
+  "require_login": false,
+  "user_messages": [
+    "Calculate XIRR in cell D19 using dates from F14:J14 and values from F18:J18"
+  ],
+  "initialization": [
+    {
+      "type": "download",
+      "parameters": {
+        "files": [
+          {
+            "url": "https://docs.google.com/spreadsheets/d/1vpxTvUOiWjZ9jmmZWV0_-pLMFbvGYVso/export?format=xlsx",
+            "path": "Real_Estate_Waterfall_init_1.xlsx"
+          }
+        ]
+      }
+    },
+    {
+      "type": "open",
+      "parameters": {
+        "path": "Real_Estate_Waterfall_init_1.xlsx"
+      }
+    }
+  ],
+  "evaluation": {
+    "golden_files": [
+      {
+        "url": "https://drive.google.com/uc?id=1Jh_rQa2bjmXrMPtBknd1B5HRQgLm6H1L&export=download&export=download",
+        "path": "Real_Estate_Waterfall_init_1_golden.xlsx"
+      }
+    ],
+    "evaluator_modes": [
+      "check_sheet_names",
+      "check_content",
+      "check_row_properties",
+      "check_column_properties",
+      "check_comments",
+      "check_formulas",
+      "check_formatting",
+      "check_merged_cells"
+    ]
+  },
+  "date_generated": "01-21-2025",
+  "related_skills": [
+    {
+      "name": "apply_formula_to_cell_range",
+      "parameters": {
+        "start_cell": "D19",
+        "end_cell": "D19",
+        "formula": "=XIRR(F18:J18,F14:J14)"
+      }
+    }
+  ],
+  "related_apps": [
+    "Microsoft Excel"
+  ]
+}

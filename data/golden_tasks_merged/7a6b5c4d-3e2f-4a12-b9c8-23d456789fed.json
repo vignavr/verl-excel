@@ -1,0 +1,59 @@
+{
+  "task_id": "7a6b5c4d-3e2f-4a12-b9c8-23d456789fed",
+  "source": "excel",
+  "require_login": false,
+  "user_messages": [
+    "In cell E10, multiply the sponsor equity share (D10) by the total equity (E12)"
+  ],
+  "initialization": [
+    {
+      "type": "download",
+      "parameters": {
+        "files": [
+          {
+            "url": "https://docs.google.com/spreadsheets/d/1vpxTvUOiWjZ9jmmZWV0_-pLMFbvGYVso/export?format=xlsx",
+            "path": "Real_Estate_Waterfall_init_1.xlsx"
+          }
+        ]
+      }
+    },
+    {
+      "type": "open",
+      "parameters": {
+        "path": "Real_Estate_Waterfall_init_1.xlsx"
+      }
+    }
+  ],
+  "evaluation": {
+    "golden_files": [
+      {
+        "url": "https://drive.google.com/uc?id=1yg8mc3Kx_ymioSjm-YxOl1O2cO9BQ3Q2&export=download&export=download",
+        "path": "Real_Estate_Waterfall_init_1_golden.xlsx"
+      }
+    ],
+    "evaluator_modes": [
+      "check_sheet_names",
+      "check_content",
+      "check_row_properties",
+      "check_column_properties",
+      "check_comments",
+      "check_formulas",
+      "check_formatting",
+      "check_merged_cells"
+    ]
+  },
+  "date_generated": "01-21-2025",
+  "related_skills": [
+    {
+      "name": "apply_formula_to_cell_range",
+      "parameters": {
+        "start_cell": "E10",
+        "end_cell": "E10",
+        "formula": "=D10*E12"
+      }
+    }
+  ],
+  "related_apps": [
+    "Microsoft Excel"
+  ]
+}

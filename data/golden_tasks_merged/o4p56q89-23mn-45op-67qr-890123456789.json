@@ -1,0 +1,63 @@
+{
+  "task_id": "o4p56q89-23mn-45op-67qr-890123456789",
+  "source": "excel",
+  "require_login": false,
+  "user_messages": [
+    "Switch rows and columns in the range A1:X30. Paste it to A31."
+  ],
+  "initialization": [
+    {
+      "type": "download",
+      "parameters": {
+        "files": [
+          {
+            "url": "https://docs.google.com/spreadsheets/d/1UGpYtuHjRqsLY9G3fyrpWWfTMnB5ohAe/export?format=xlsx",
+            "path": "Baseball_init_good.xlsx"
+          }
+        ]
+      }
+    },
+    {
+      "type": "open",
+      "parameters": {
+        "path": "Baseball_init_good.xlsx"
+      }
+    }
+  ],
+  "evaluation": {
+    "golden_files": [
+      {
+        "url": "https://drive.google.com/uc?id=1IcZofpdNXOKPy7Kkr6l7VdgnOpJyZhOI&export=download&export=download",
+        "path": "Baseball_init_good_golden.xlsx"
+      }
+    ],
+    "evaluator_modes": [
+      "check_sheet_names",
+      "check_content",
+      "check_row_properties",
+      "check_column_properties",
+      "check_comments",
+      "check_formulas",
+      "check_formatting",
+      "check_merged_cells"
+    ]
+  },
+  "date_generated": "01-21-2025",
+  "related_skills": [
+    {
+      "name": "copy_paste_special",
+      "parameters": {
+        "start_cell": "A1",
+        "end_cell": "X30",
+        "paste_cell": "A31",
+        "paste_type": "Values",
+        "operation": "None",
+        "skip_blanks": false,
+        "transpose": true
+      }
+    }
+  ],
+  "related_apps": [
+    "Microsoft Excel"
+  ]
+}

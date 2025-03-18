@@ -1,0 +1,58 @@
+{
+  "task_id": "ungroup_columns",
+  "source": "excel",
+  "require_login": false,
+  "user_messages": [
+    "Please ungroup columns F:I in my spreadsheet."
+  ],
+  "initialization": [
+    {
+      "type": "download",
+      "parameters": {
+        "files": [
+          {
+            "url": "https://docs.google.com/spreadsheets/d/1mMkxLpErLGlBwDTUtkgaTXJUWTU6XlcG/export?format=xlsx&id=1mMkxLpErLGlBwDTUtkgaTXJUWTU6XlcG",
+            "path": "Baseball_init_5.xlsx"
+          }
+        ]
+      }
+    },
+    {
+      "type": "open",
+      "parameters": {
+        "path": "Baseball_init_5.xlsx"
+      }
+    }
+  ],
+  "evaluation": {
+    "golden_files": [
+      {
+        "url": "https://drive.google.com/uc?id=11fBGwXByxRby6_guGLOvtGaxUETJsbK8&export=download&export=download",
+        "path": "Baseball_init_5_golden.xlsx"
+      }
+    ],
+    "evaluator_modes": [
+      "check_sheet_names",
+      "check_content",
+      "check_row_properties",
+      "check_column_properties",
+      "check_comments",
+      "check_formulas",
+      "check_formatting",
+      "check_merged_cells"
+    ]
+  },
+  "date_generated": "01-30-2025",
+  "related_skills": [
+    {
+      "name": "ungroup_columns",
+      "parameters": {
+        "start_column": "F",
+        "end_column": "I"
+      }
+    }
+  ],
+  "related_apps": [
+    "Microsoft Excel"
+  ]
+}

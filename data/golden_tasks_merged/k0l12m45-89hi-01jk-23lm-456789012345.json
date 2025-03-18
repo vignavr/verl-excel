@@ -1,0 +1,51 @@
+{
+  "task_id": "k0l12m45-89hi-01jk-23lm-456789012345",
+  "source": "excel",
+  "require_login": false,
+  "user_messages": [
+    "Insert a slicer at column C for the table in range C3:G10."
+  ],
+  "initialization": [
+    {
+      "type": "download",
+      "parameters": {
+        "files": [
+          {
+            "url": "https://docs.google.com/spreadsheets/d/1uWJ66cvwgSSZcM80YEI50ngmYSqtar3F/export?format=xlsx",
+            "path": "Baseball_init_3.xlsx"
+          }
+        ]
+      }
+    },
+    {
+      "type": "open",
+      "parameters": {
+        "path": "Baseball_init_3.xlsx"
+      }
+    }
+  ],
+  "evaluation": {
+    "golden_files": [
+      {
+        "url": "https://drive.google.com/uc?id=1Ydru23SKH4y--PG4Z__IBS7NgOOUovpq&export=download&export=download",
+        "path": "Baseball_init_3_golden.xlsx"
+      }
+    ],
+    "evaluator_modes": [
+      "check_slicers"
+    ]
+  },
+  "date_generated": "01-21-2025",
+  "related_skills": [
+    {
+      "name": "insert_slicer",
+      "parameters": {
+        "table_range": "C3:G10",
+        "column": "C"
+      }
+    }
+  ],
+  "related_apps": [
+    "Microsoft Excel"
+  ]
+}

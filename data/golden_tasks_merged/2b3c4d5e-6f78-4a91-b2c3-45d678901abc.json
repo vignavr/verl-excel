@@ -1,0 +1,59 @@
+{
+  "task_id": "2b3c4d5e-6f78-4a91-b2c3-45d678901abc",
+  "source": "excel",
+  "require_login": false,
+  "user_messages": [
+    "In cell K5, create a formula that compares cells K6 and K7. Display 'OK' if they are equal, and 'Error' if they are not equal"
+  ],
+  "initialization": [
+    {
+      "type": "download",
+      "parameters": {
+        "files": [
+          {
+            "url": "https://docs.google.com/spreadsheets/d/1vpxTvUOiWjZ9jmmZWV0_-pLMFbvGYVso/export?format=xlsx",
+            "path": "Real_Estate_Waterfall_init_1.xlsx"
+          }
+        ]
+      }
+    },
+    {
+      "type": "open",
+      "parameters": {
+        "path": "Real_Estate_Waterfall_init_1.xlsx"
+      }
+    }
+  ],
+  "evaluation": {
+    "golden_files": [
+      {
+        "url": "https://drive.google.com/uc?id=1MuUc6_ZgJAUczKd1FN6FeteAObRzMMmO&export=download&export=download",
+        "path": "Real_Estate_Waterfall_init_1_golden.xlsx"
+      }
+    ],
+    "evaluator_modes": [
+      "check_sheet_names",
+      "check_content",
+      "check_row_properties",
+      "check_column_properties",
+      "check_comments",
+      "check_formulas",
+      "check_formatting",
+      "check_merged_cells"
+    ]
+  },
+  "date_generated": "01-21-2025",
+  "related_skills": [
+    {
+      "name": "apply_formula_to_cell_range",
+      "parameters": {
+        "start_cell": "K5",
+        "end_cell": "K5",
+        "formula": "=IF(K6=K7,\"OK\",\"Error\")"
+      }
+    }
+  ],
+  "related_apps": [
+    "Microsoft Excel"
+  ]
+}

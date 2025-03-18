@@ -1,0 +1,58 @@
+{
+  "task_id": "i8j90k23-67fg-89hi-01jk-234567890123",
+  "source": "excel",
+  "require_login": false,
+  "user_messages": [
+    "Add a comment to cell A1 that says 'Review this value'."
+  ],
+  "initialization": [
+    {
+      "type": "download",
+      "parameters": {
+        "files": [
+          {
+            "url": "https://docs.google.com/spreadsheets/d/1r6albAgRvhtif7wglsgJtVd-gvlw3mpV/export?format=xlsx",
+            "path": "Baseball_init_good.xlsx"
+          }
+        ]
+      }
+    },
+    {
+      "type": "open",
+      "parameters": {
+        "path": "Baseball_init_good.xlsx"
+      }
+    }
+  ],
+  "evaluation": {
+    "golden_files": [
+      {
+        "url": "https://drive.google.com/uc?id=1ul9tI9wvqWfG4V4hyccA6IPccEA0fE9D&export=download&export=download",
+        "path": "Baseball_init_good_golden.xlsx"
+      }
+    ],
+    "evaluator_modes": [
+      "check_sheet_names",
+      "check_content",
+      "check_row_properties",
+      "check_column_properties",
+      "check_comments",
+      "check_formulas",
+      "check_formatting",
+      "check_merged_cells"
+    ]
+  },
+  "date_generated": "01-21-2025",
+  "related_skills": [
+    {
+      "name": "insert_comment",
+      "parameters": {
+        "cell": "A1",
+        "comment_text": "Review this value"
+      }
+    }
+  ],
+  "related_apps": [
+    "Microsoft Excel"
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "task_id": "4c5d6e7f-8g9h-4i10-j11k-12l13m14n15p",
+  "source": "excel",
+  "require_login": false,
+  "user_messages": [
+    "In cell D16, sum the values in the range F16:K16"
+  ],
+  "initialization": [
+    {
+      "type": "download",
+      "parameters": {
+        "files": [
+          {
+            "url": "https://docs.google.com/spreadsheets/d/1vpxTvUOiWjZ9jmmZWV0_-pLMFbvGYVso/export?format=xlsx",
+            "path": "Real_Estate_Waterfall_init_1.xlsx"
+          }
+        ]
+      }
+    },
+    {
+      "type": "open",
+      "parameters": {
+        "path": "Real_Estate_Waterfall_init_1.xlsx"
+      }
+    }
+  ],
+  "evaluation": {
+    "golden_files": [
+      {
+        "url": "https://drive.google.com/uc?id=1xUCXgN_C4FCA-9DrOuBpf46EMzsgDEmP&export=download&export=download",
+        "path": "Real_Estate_Waterfall_init_1_golden.xlsx"
+      }
+    ],
+    "evaluator_modes": [
+      "check_sheet_names",
+      "check_content",
+      "check_row_properties",
+      "check_column_properties",
+      "check_comments",
+      "check_formulas",
+      "check_formatting",
+      "check_merged_cells"
+    ]
+  },
+  "date_generated": "01-21-2025",
+  "related_skills": [
+    {
+      "name": "apply_formula_to_cell_range",
+      "parameters": {
+        "start_cell": "D16",
+        "end_cell": "D16",
+        "formula": "=SUM(F16:K16)"
+      }
+    }
+  ],
+  "related_apps": [
+    "Microsoft Excel"
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "task_id": "b567f6f5-1b67-4e03-8cf3-70e567363488",
+  "source": "documentation",
+  "require_login": false,
+  "user_messages": [
+    "Find the drop in Long-term Liabilities from 2015 (G3) to 2018 (G6) and paste it in cell G8."
+  ],
+  "initialization": [
+    {
+      "type": "download",
+      "parameters": {
+        "files": [
+          {
+            "url": "https://drive.google.com/uc?id=135XDfozh5XmO9juDVf_o1mtDEfeQV8wO&export=download",
+            "path": "SmallBalanceSheet.xlsx"
+          }
+        ]
+      }
+    },
+    {
+      "type": "open",
+      "parameters": {
+        "path": "SmallBalanceSheet.xlsx"
+      }
+    }
+  ],
+  "related_skills": [
+    {
+      "name": "apply_formula_to_cell_range",
+      "parameters": {
+        "start_cell": "G8",
+        "end_cell": "G8",
+        "formula": "=(G3-G6)"
+      }
+    }
+  ],
+  "evaluation": {
+    "golden_files": [
+      {
+        "url": "https://docs.google.com/spreadsheets/d/1MrZj_uPHFKGIzakhBUSrG1HawemX81Ih/export?format=xlsx",
+        "path": "SmallBalanceSheet_golden.xlsx"
+      }
+    ],
+    "evaluator_modes": [
+      "check_sheet_names",
+      "check_content",
+      "check_row_properties",
+      "check_column_properties",
+      "check_comments",
+      "check_formulas",
+      "check_formatting",
+      "check_merged_cells"
+    ]
+  },
+  "date_generated": "01-22-2025",
+  "related_apps": [
+    "Microsoft Excel"
+  ],
+  "specificity": "medium"
+}

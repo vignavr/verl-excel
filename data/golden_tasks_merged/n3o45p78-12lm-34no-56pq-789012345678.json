@@ -1,0 +1,53 @@
+{
+  "task_id": "n3o45p78-12lm-34no-56pq-789012345678",
+  "source": "excel",
+  "require_login": false,
+  "user_messages": [
+    "Insert a line sparkline for range D1:P1 in cell B1."
+  ],
+  "initialization": [
+    {
+      "type": "download",
+      "parameters": {
+        "files": [
+          {
+            "url": "https://docs.google.com/spreadsheets/d/1UGpYtuHjRqsLY9G3fyrpWWfTMnB5ohAe/export?format=xlsx",
+            "path": "Baseball_init_good.xlsx"
+          }
+        ]
+      }
+    },
+    {
+      "type": "open",
+      "parameters": {
+        "path": "Baseball_init_good.xlsx"
+      }
+    }
+  ],
+  "evaluation": {
+    "golden_files": [
+      {
+        "url": "https://drive.google.com/uc?id=1C3vtiI7_rLZo5uTY3xmNOoDw47QXhQ93&export=download&export=download",
+        "path": "Baseball_init_good_golden.xlsx"
+      }
+    ],
+    "evaluator_modes": [
+      "check_sparklines"
+    ]
+  },
+  "date_generated": "01-21-2025",
+  "related_skills": [
+    {
+      "name": "insert_sparkline",
+      "parameters": {
+        "start_cell": "D1",
+        "end_cell": "P1",
+        "location": "B1",
+        "sparkline_type": "Line"
+      }
+    }
+  ],
+  "related_apps": [
+    "Microsoft Excel"
+  ]
+}

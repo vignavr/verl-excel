@@ -1,0 +1,51 @@
+{
+  "task_id": "6a2a003b-cd71-4aed-8e24-e73f8f02d379",
+  "source": "excel",
+  "require_login": false,
+  "user_messages": [
+    "Create a table from range A1:D20 in Sheet1 with headers."
+  ],
+  "initialization": [
+    {
+      "type": "download",
+      "parameters": {
+        "files": [
+          {
+            "url": "https://docs.google.com/spreadsheets/d/1UGpYtuHjRqsLY9G3fyrpWWfTMnB5ohAe/export?format=xlsx",
+            "path": "Baseball_init_good.xlsx"
+          }
+        ]
+      }
+    },
+    {
+      "type": "open",
+      "parameters": {
+        "path": "Baseball_init_good.xlsx"
+      }
+    }
+  ],
+  "evaluation": {
+    "golden_files": [
+      {
+        "url": "https://drive.google.com/uc?id=1YQsK8z9Q-z9fErqNGe2mljYR6lrU8bki&export=download&export=download",
+        "path": "Baseball_init_good_golden.xlsx"
+      }
+    ],
+    "evaluator_modes": [
+      "check_tables"
+    ]
+  },
+  "date_generated": "01-21-2025",
+  "related_skills": [
+    {
+      "name": "create_table",
+      "parameters": {
+        "start_cell": "A1",
+        "end_cell": "D20"
+      }
+    }
+  ],
+  "related_apps": [
+    "Microsoft Excel"
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "task_id": "eae66326-f725-4cb6-8e32-6b788abdfc98",
+  "source": "excel",
+  "require_login": false,
+  "user_messages": [
+    "Add a thin outline style border to bottom of cells B2:D2."
+  ],
+  "initialization": [
+    {
+      "type": "download",
+      "parameters": {
+        "files": [
+          {
+            "url": "https://docs.google.com/spreadsheets/d/1UGpYtuHjRqsLY9G3fyrpWWfTMnB5ohAe/export?format=xlsx",
+            "path": "Baseball_init_good.xlsx"
+          }
+        ]
+      }
+    },
+    {
+      "type": "open",
+      "parameters": {
+        "path": "Baseball_init_good.xlsx"
+      }
+    }
+  ],
+  "related_skills": [
+    {
+      "name": "add_bottom_border",
+      "parameters": {
+        "start_cell": "B2",
+        "end_cell": "D2"
+      }
+    }
+  ],
+  "evaluation": {
+    "golden_files": [
+      {
+        "url": "https://drive.google.com/uc?id=1Rc2bOKBw-IvkmeGx4INihItY8nja9Krb&export=download&export=download",
+        "path": "Baseball_init_good (5)_golden.xlsx"
+      }
+    ],
+    "evaluator_modes": [
+      "check_sheet_names",
+      "check_content",
+      "check_row_properties",
+      "check_column_properties",
+      "check_comments",
+      "check_formulas",
+      "check_formatting",
+      "check_merged_cells"
+    ]
+  },
+  "date_generated": "01-21-2025",
+  "related_apps": [
+    "Microsoft Excel"
+  ]
+}

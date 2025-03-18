@@ -1,0 +1,63 @@
+{
+  "task_id": "ea425570-d30c-417b-b610-9a8e86527fa4",
+  "source": "documentation",
+  "require_login": false,
+  "user_messages": [
+    "Apply italic formatting to all header text (columns A through I) in the balance sheet. Text should be in the middle center of the cell"
+  ],
+  "initialization": [
+    {
+      "type": "download",
+      "parameters": {
+        "files": [
+          {
+            "url": "https://drive.google.com/uc?id=135XDfozh5XmO9juDVf_o1mtDEfeQV8wO&export=download",
+            "path": "SmallBalanceSheet.xlsx"
+          }
+        ]
+      }
+    },
+    {
+      "type": "open",
+      "parameters": {
+        "path": "SmallBalanceSheet.xlsx"
+      }
+    }
+  ],
+  "related_skills": [
+    {
+      "name": "style_cell",
+      "parameters": {
+        "start_cell": "A1",
+        "end_cell": "I1",
+        "font_style": "italic",
+        "vertical_alignment_style": "middle",
+        "horizontal_alignment_style": "center",
+        "is_enabled": true
+      }
+    }
+  ],
+  "evaluation": {
+    "golden_files": [
+      {
+        "url": "https://drive.google.com/uc?id=1e-mvpVBice642VAKoWEoLE8L8aGDw7sP&export=download&export=download",
+        "path": "SmallBalanceSheet (4)_golden.xlsx"
+      }
+    ],
+    "evaluator_modes": [
+      "check_sheet_names",
+      "check_content",
+      "check_row_properties",
+      "check_column_properties",
+      "check_comments",
+      "check_formulas",
+      "check_formatting",
+      "check_merged_cells"
+    ]
+  },
+  "date_generated": "01-22-2025",
+  "related_apps": [
+    "Microsoft Excel"
+  ],
+  "specificity": "medium"
+}

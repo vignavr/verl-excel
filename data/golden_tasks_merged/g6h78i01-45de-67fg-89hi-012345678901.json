@@ -1,0 +1,58 @@
+{
+  "task_id": "g6h78i01-45de-67fg-89hi-012345678901",
+  "source": "excel",
+  "require_login": false,
+  "user_messages": [
+    "Clear all formatting from cell J30."
+  ],
+  "initialization": [
+    {
+      "type": "download",
+      "parameters": {
+        "files": [
+          {
+            "url": "https://docs.google.com/spreadsheets/d/1ifmpIzJ9aPDaCqDhebQmNi1lPRjeXM1E/export?format=xlsx",
+            "path": "Baseball_init_2.xlsx"
+          }
+        ]
+      }
+    },
+    {
+      "type": "open",
+      "parameters": {
+        "path": "Baseball_init_2.xlsx"
+      }
+    }
+  ],
+  "evaluation": {
+    "golden_files": [
+      {
+        "url": "https://drive.google.com/uc?id=14KorM6Rbt51RTxxXMxy_qIF5yjGMSBWE&export=download&export=download",
+        "path": "Baseball_init_2_golden.xlsx"
+      }
+    ],
+    "evaluator_modes": [
+      "check_sheet_names",
+      "check_content",
+      "check_row_properties",
+      "check_column_properties",
+      "check_comments",
+      "check_formulas",
+      "check_formatting",
+      "check_merged_cells"
+    ]
+  },
+  "date_generated": "01-21-2025",
+  "related_skills": [
+    {
+      "name": "clear_formatting",
+      "parameters": {
+        "start_cell": "J30",
+        "end_cell": "J30"
+      }
+    }
+  ],
+  "related_apps": [
+    "Microsoft Excel"
+  ]
+}

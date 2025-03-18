@@ -1,0 +1,62 @@
+{
+  "task_id": "938efe79-60b0-48fd-b494-c09e28fb8127",
+  "source": "excel",
+  "require_login": false,
+  "user_messages": [
+    "Apply a bold font style to cells C2:C5."
+  ],
+  "initialization": [
+    {
+      "type": "download",
+      "parameters": {
+        "files": [
+          {
+            "url": "https://docs.google.com/spreadsheets/d/1UGpYtuHjRqsLY9G3fyrpWWfTMnB5ohAe/export?format=xlsx",
+            "path": "Baseball_init_good.xlsx"
+          }
+        ]
+      }
+    },
+    {
+      "type": "open",
+      "parameters": {
+        "path": "Baseball_init_good.xlsx"
+      }
+    }
+  ],
+  "evaluation": {
+    "golden_files": [
+      {
+        "url": "https://drive.google.com/uc?id=1IDwXy8H2kB1nmL2k2a7kEtl5HHrqmaLN&export=download&export=download",
+        "path": "Baseball_init_good_golden.xlsx"
+      }
+    ],
+    "evaluator_modes": [
+      "check_sheet_names",
+      "check_content",
+      "check_row_properties",
+      "check_column_properties",
+      "check_comments",
+      "check_formulas",
+      "check_formatting",
+      "check_merged_cells"
+    ]
+  },
+  "date_generated": "01-21-2025",
+  "related_skills": [
+    {
+      "name": "style_cell",
+      "parameters": {
+        "start_cell": "C2",
+        "end_cell": "C5",
+        "font_style": "bold",
+        "vertical_alignment_style": "middle",
+        "horizontal_alignment_style": "center",
+        "is_enabled": true
+      }
+    }
+  ],
+  "related_apps": [
+    "Microsoft Excel"
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "task_id": "r7s89t12-56pq-78rs-90tu-123456789012",
+  "source": "excel",
+  "require_login": false,
+  "user_messages": [
+    "Create a named range called 'SalesData' for cells A1:D10."
+  ],
+  "initialization": [
+    {
+      "type": "download",
+      "parameters": {
+        "files": [
+          {
+            "url": "https://docs.google.com/spreadsheets/d/1UGpYtuHjRqsLY9G3fyrpWWfTMnB5ohAe/export?format=xlsx",
+            "path": "Baseball_init_good.xlsx"
+          }
+        ]
+      }
+    },
+    {
+      "type": "open",
+      "parameters": {
+        "path": "Baseball_init_good.xlsx"
+      }
+    }
+  ],
+  "evaluation": {
+    "golden_files": [
+      {
+        "url": "https://drive.google.com/uc?id=16v9YrKJ25CcXftNIKa62iZGi8YW8kUnk&export=download&export=download",
+        "path": "Baseball_init_good_golden.xlsx"
+      }
+    ],
+    "evaluator_modes": [
+      "check_named_ranges"
+    ]
+  },
+  "date_generated": "01-21-2025",
+  "related_skills": [
+    {
+      "name": "create_named_range",
+      "parameters": {
+        "start_cell": "A1",
+        "end_cell": "D10",
+        "name": "SalesData"
+      }
+    }
+  ],
+  "related_apps": [
+    "Microsoft Excel"
+  ]
+}

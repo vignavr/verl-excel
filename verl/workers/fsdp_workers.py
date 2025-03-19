@@ -19,6 +19,7 @@ import logging
 import os
 import warnings
 import psutil
+import json
 
 import torch
 import torch.distributed
@@ -510,7 +511,181 @@ class ActorRolloutRefWorker(Worker):
             log_gpu_memory_usage('After entering rollout sharding manager', logger=logger)
 
             prompts = self.rollout_sharding_manager.preprocess_data(prompts)
-            output = self.rollout.generate_sequences(prompts=prompts)
+            
+            # Interactive generation loop that handles skill execution
+            # First tokenize the special tags we need to look for
+            skill_start_tokens = self.tokenizer("<SKILL>", add_special_tokens=False).input_ids
+            skill_end_tokens = self.tokenizer("</SKILL>", add_special_tokens=False).input_ids
+            output_start_tokens = self.tokenizer("<OUTPUT>", add_special_tokens=False).input_ids
+            output_end_tokens = self.tokenizer("</OUTPUT>", add_special_tokens=False).input_ids
+            
+            # Initialize with prompts - create a new DataProto instead of using copy()
+            current_sequences = DataProto(
+                batch=prompts.batch.clone() if hasattr(prompts.batch, 'clone') else prompts.batch,
+                non_tensor_batch=prompts.non_tensor_batch.copy() if hasattr(prompts.non_tensor_batch, 'copy') else prompts.non_tensor_batch,
+                meta_info=prompts.meta_info.copy()
+            )
+            
+            # Get remote environment instance
+            try:
+                remote_env = self.remote_env
+            except:
+                remote_env = None # for testing
+            
+            # Get EOS token ID and make sure it's a scalar, not a list
+            eos_token_id = meta_info['eos_token_id']
+            if isinstance(eos_token_id, list):
+                eos_token_id = eos_token_id[0]  # Take the first EOS token if it's a list
+            all_completed = False
+            
+            while not all_completed:
+                # Generate up to next </SKILL> or EOS (pass eos_token_id as a single value)
+                generation_params = {"stopping_criteria": [skill_end_tokens, eos_token_id]}
+                next_step = self.rollout.generate_sequences(current_sequences, **generation_params)
+                
+                # Check if all sequences have reached EOS
+                generated_ids = next_step.batch['input_ids']
+                attention_mask = next_step.batch['attention_mask']
+                batch_size = generated_ids.shape[0]
+                
+                all_completed = True
+                for i in range(batch_size):
+                    # Check if this sequence hit EOS (now eos_token_id is guaranteed to be a scalar)
+                    masked_ids = generated_ids[i, attention_mask[i].bool()]
+                    if eos_token_id in masked_ids:
+                        continue
+                    
+                    # Check if we have a complete <SKILL></SKILL> block
+                    sequence = generated_ids[i, attention_mask[i].bool()].tolist()
+                    
+                    # Find the last </SKILL> tag
+                    # This requires finding a pattern match in the token IDs
+                    end_positions = []
+                    for j in range(len(sequence) - len(skill_end_tokens) + 1):
+                        if sequence[j:j+len(skill_end_tokens)] == skill_end_tokens:
+                            end_positions.append(j)
+                    
+                    if not end_positions:
+                        all_completed = False
+                        continue
+                    
+                    last_end_pos = end_positions[-1]
+                    
+                    # Find the matching <SKILL> tag before this </SKILL>
+                    start_pos = None
+                    for j in range(last_end_pos - len(skill_start_tokens), -1, -1):
+                        if sequence[j:j+len(skill_start_tokens)] == skill_start_tokens:
+                            start_pos = j
+                            break
+                    
+                    if start_pos is None:
+                        all_completed = False
+                        continue
+                    
+                    # Extract the skill content
+                    skill_content_tokens = sequence[start_pos + len(skill_start_tokens):last_end_pos]
+                    skill_content = self.tokenizer.decode(skill_content_tokens)
+                    
+                    # Execute the skill with remote environment
+                    if remote_env is not None:
+                        observation = remote_env.execute(json.loads(skill_content))
+                    else:
+                        observation = "This is a test observation"
+                    
+                    # Format the observation
+                    output_text = f"<OUTPUT>{observation}</OUTPUT>"
+                    output_tokens = self.tokenizer(output_text, add_special_tokens=False).input_ids
+                    
+                    # Append the observation to the sequence
+                    new_sequence = sequence[:last_end_pos + len(skill_end_tokens)] + output_tokens
+                    
+                    # Update the sequence in the batch
+                    new_seq_tensor = torch.tensor(new_sequence, device=generated_ids.device)
+                    new_attn_mask = torch.ones_like(new_seq_tensor)
+                    
+                    padded_seq = torch.full(
+                        (generated_ids.shape[1],), 
+                        meta_info['pad_token_id'], 
+                        device=generated_ids.device
+                    )
+                    padded_mask = torch.zeros_like(padded_seq)
+                    
+                    seq_len = min(len(new_sequence), generated_ids.shape[1])
+                    padded_seq[:seq_len] = new_seq_tensor[:seq_len]
+                    padded_mask[:seq_len] = new_attn_mask[:seq_len]
+                    
+                    generated_ids[i] = padded_seq
+                    attention_mask[i] = padded_mask
+                    
+                    all_completed = False
+                
+                # Update current sequences for next iteration
+                current_sequences.batch['input_ids'] = generated_ids
+                current_sequences.batch['attention_mask'] = attention_mask
+                
+                # If all sequences have reached EOS, exit the loop
+                if all_completed:
+                    break
+            
+            # Post-process to remove <OUTPUT></OUTPUT> content
+            output = DataProto(
+                batch=next_step.batch.clone(),
+                non_tensor_batch=next_step.non_tensor_batch.copy(),
+                meta_info=next_step.meta_info.copy()
+            )
+            # print the decoded output
+            print(self.tokenizer.decode(output.batch['input_ids'][0]))
+            assert False
+            
+            # For each sequence, remove content between <OUTPUT> and </OUTPUT>
+            for i in range(batch_size):
+                sequence = generated_ids[i, attention_mask[i].bool()].tolist()
+                clean_sequence = []
+                skip_until = -1
+                
+                # Iterate through the sequence, skipping content between <OUTPUT> and </OUTPUT>
+                j = 0
+                while j < len(sequence):
+                    # Check for <OUTPUT> tag
+                    if (j + len(output_start_tokens) <= len(sequence) and 
+                        sequence[j:j+len(output_start_tokens)] == output_start_tokens):
+                        # Find the closing </OUTPUT> tag
+                        end_j = j
+                        while end_j < len(sequence) - len(output_end_tokens) + 1:
+                            if sequence[end_j:end_j+len(output_end_tokens)] == output_end_tokens:
+                                break
+                            end_j += 1
+                        
+                        if end_j < len(sequence) - len(output_end_tokens) + 1:
+                            # Found the closing tag, skip everything in between
+                            j = end_j + len(output_end_tokens)
+                        else:
+                            # No closing tag found, add the start tag and continue
+                            clean_sequence.extend(output_start_tokens)
+                            j += len(output_start_tokens)
+                    else:
+                        # Add the current token to the clean sequence
+                        clean_sequence.append(sequence[j])
+                        j += 1
+                
+                # Update the sequence
+                clean_seq_tensor = torch.tensor(clean_sequence, device=generated_ids.device)
+                clean_attn_mask = torch.ones_like(clean_seq_tensor)
+                
+                padded_seq = torch.full(
+                    (generated_ids.shape[1],), 
+                    meta_info['pad_token_id'], 
+                    device=generated_ids.device
+                )
+                padded_mask = torch.zeros_like(padded_seq)
+                
+                seq_len = min(len(clean_sequence), generated_ids.shape[1])
+                padded_seq[:seq_len] = clean_seq_tensor[:seq_len]
+                padded_mask[:seq_len] = clean_attn_mask[:seq_len]
+                
+                output.batch['input_ids'][i] = padded_seq
+                output.batch['attention_mask'][i] = padded_mask
+            
             log_gpu_memory_usage('After rollout generation', logger=logger)
 
             output = self.rollout_sharding_manager.postprocess_data(output)
@@ -1172,49 +1347,3 @@ class RewardModelWorker(Worker):
 
         output = output.to('cpu')
         return output
-
-"""
-@register(dispatch_mode=Dispatch.DP_COMPUTE_PROTO)
-def generate_sequences(self, prompts: DataProto):
-    # Support all hardwares
-    prompts = prompts.to(torch.cuda.current_device())
-
-    assert self._is_rollout
-    if self._is_offload_param:
-        load_fsdp_model_to_gpu(self.actor_module_fsdp)
-
-    meta_info = {
-        'eos_token_id': self.generation_config.eos_token_id 
-            if self.generation_config is not None else self.tokenizer.eos_token_id,
-        'pad_token_id': self.generation_config.pad_token_id 
-            if self.generation_config is not None else self.tokenizer.pad_token_id,
-    }
-    prompts.meta_info.update(meta_info)
-
-    with self.rollout_sharding_manager:
-        # after parameters sync with rollout, offload actor model to CPU
-        if self._is_offload_param:
-            offload_fsdp_model_to_cpu(self.actor_module_fsdp)
-        if self._is_offload_optimizer:
-            offload_fsdp_optimizer(optimizer=self.actor_optimizer)
-
-        log_gpu_memory_usage('After entering rollout sharding manager', logger=logger)
-
-        prompts = self.rollout_sharding_manager.preprocess_data(prompts)
-        
-        # Modify generation to handle skills
-        if prompts.meta_info.get('skill_tags', False):
-            # Generate until </SKILL> or EOS
-            prompts.meta_info['stopping_criteria'] = ["</SKILL>", self.tokenizer.eos_token]
-            
-        output = self.rollout.generate_sequences(prompts=prompts)
-        log_gpu_memory_usage('After rollout generation', logger=logger)
-
-        output = self.rollout_sharding_manager.postprocess_data(output)
-
-    output = output.to('cpu')
-
-    # clear kv cache
-    log_gpu_memory_usage('After recompute log prob', logger=logger)
-    return output
-    """

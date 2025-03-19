@@ -2,7 +2,7 @@
 
 To preprocess the data, run `python3 examples/data_preprocess/golden_tasks_merged.py`.
 
-To start training, run:
+To start training, first `wandb login` then run:
 
 ```
 PYTHONUNBUFFERED=1 python3 -m verl.trainer.main_ppo \

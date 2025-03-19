@@ -44,7 +44,7 @@ if __name__ == '__main__':
             all_data.append({
                 "prompt": [{
                     "role": "user",
-                    "content": data['user_messages'][0],
+                    "content": data['user_messages'][0] + "\nThink through the problem step by step. Every time you want to execute a skill on the user's Excel file, specify the skill name and arguments in JSON format, enclosed in <SKILL>...</SKILL> tags, e.g. <SKILL>{\"name\": \"insert_column\", \"args\": {\"column_name\": \"E\"}}</SKILL>. The output of past skills will be provided to you in <OUTPUT>...</OUTPUT> tags immediately after </SKILL>, e.g. <SKILL>{\"name\": \"insert_column\", \"args\": {\"column_name\": \"E\"}}</SKILL><OUTPUT>{\"status\": \"success\", \"message\": \"Column E inserted successfully\"}</OUTPUT>.",
                 }],
                 "initialization": data['initialization'],
                 "evaluation": data['evaluation'],
